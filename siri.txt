@@ -1,144 +1,166 @@
-REGISTRATION.html
-<!DOCTYPE >
-<html>
-    <head>
-        <title>REGISTRATION FORM</title>
-        <script type="text/javascript">
-            function validateForm() {
-                var firstName = document.getElementById("firstName").value;
-                var lastName = document.getElementById("lastName").value;
-                var mobile = document.getElementById("mobile").value;
-                var email = document.getElementById("email").value;
-                var password = document.getElementById("password").value;
-                var address = document.getElementById("address").value;
-                var city = document.getElementById("city").value;
-                var state = document.getElementById("state").value;
-                var country = document.getElementById("country").value;
-                var gender = document.querySelector('input[name="gender"]:checked');
-                var course = document.querySelector('input[name="course"]:checked');
-                if (firstName == "") {
-                alert("First Name must be filled out.");
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        /* CSS for the form and overall layout */
+        body {
+            background-color: #f7f7f7;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .form-container {
+            width: 50%;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+
+        label {
+            font-size: 16px;
+            margin: 10px 0;
+            display: block;
+        }
+
+        input[type="text"], input[type="email"], input[type="password"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        textarea {
+            height: 100px;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .thank-you-container {
+            width: 50%;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .thank-you-container h1 {
+            color: #4CAF50;
+        }
+    </style>
+    <script>
+        // JavaScript form validation
+        function validateForm() {
+            // Validate First Name
+            const firstName = document.forms["regForm"]["fname"].value;
+            if (firstName === "") {
+                alert("First Name must be filled out");
                 return false;
             }
 
-            if (lastName == "") {
-                alert("Last Name must be filled out.");
+            // Validate Last Name
+            const lastName = document.forms["regForm"]["lname"].value;
+            if (lastName === "") {
+                alert("Last Name must be filled out");
                 return false;
             }
 
-            if (mobile == "" || !/^\d{10}$/.test(mobile)) {
-                alert("Please enter a valid 10-digit mobile number.");
+            // Validate Username (should be less than 8 characters)
+            const username = document.forms["regForm"]["username"].value;
+            if (username.length > 8) {
+                alert("Username must be less than 8 characters");
                 return false;
             }
 
-            var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-            if (email == "" || !emailPattern.test(email)) {
-                alert("Please enter a valid email address.");
+            // Validate Password (should contain at least one uppercase, one lowercase, one number, and at least 8 characters)
+            const password = document.forms["regForm"]["password"].value;
+            const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+            if (!passwordPattern.test(password)) {
+                alert("Password must contain at least one number, one lowercase letter, one uppercase letter, and be at least 8 characters long.");
                 return false;
             }
 
-            if (password == "" || password.length < 8) {
-                alert("Password must be at least 8 characters long.");
+            // Validate Email
+            const email = document.forms["regForm"]["email"].value;
+            const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+            if (!emailPattern.test(email)) {
+                alert("Please enter a valid email.");
                 return false;
             }
 
-            if (address == "") {
-                alert("Address must be filled out.");
-                return false;
-            }
-
-            if (city == "") {
-                alert("City must be filled out.");
-                return false;
-            }
-
-            if (state == "") {
-                alert("State must be filled out.");
-                return false;
-            }
-
-            if (!gender) {
-                alert("Please select your gender.");
-                return false;
-            }
-
-            if (!course) {
-                alert("Please select a course.");
-                return false;
-            }
-
-            return true;
+            // If validation is successful, show thank you message
+            document.querySelector('.form-container').style.display = 'none'; // Hide the form
+            document.querySelector('.thank-you-container').style.display = 'block'; // Show thank you message
+            return false; // Prevent form submission to server
         }
     </script>
 </head>
-<img src="/home/vbit/Desktop/527/logo.png" style="width:40%;"><br> <br>
-
 <body>
+    <div class="form-container">
+        <h1>Registration Form</h1>
+        <form name="regForm" onsubmit="return validateForm()">
+            <label for="fname">First Name:</label>
+            <input type="text" name="fname" id="fname" required><br>
 
-    <form action="nextpage.html" method="get">
-            <label for="First name">First name:</label>
-            <input type="text" id="First name" name="name" required> <br><br>
-            <label for="Last name">Last name:</label>
-            <input type="text" id="Last name" name="name" required> <br><br>
-            <label for="Gender">Gender:</label>
-            <input type="radio" id="Male" name="Gender" value="Male"> Male
-            <input type="radio" id="Female" name="Gender" value="Female"> Female
-            <input type="radio" id="Other" name="Gender" value="Other"> Other<br><br>
+            <label for="lname">Last Name:</label>
+            <input type="text" name="lname" id="lname" required><br>
+
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" required><br>
+
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="username" required><br>
+
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" required><br>
+
+            <label for="gender">Gender:</label><br>
+            Male <input type="radio" name="gender" value="male" required>
+            Female <input type="radio" name="gender" value="female" required><br>
+
+            <label for="address">Address:</label><br>
+            <textarea name="address" id="address" required></textarea><br>
+
             <label for="mobile">Mobile Number:</label>
-            <input type="text" id="mobile" name="mobile"><br><br>
-            <label for="Email">Email:</label>
-            <input type="text" id="Email" name="Email"><br><br>
-            <label for="Password">Password:</label>
-            <input type="password" id="Password" name="Password"><br><br>
-            <label for="address">Address:</label>
-            <textarea id="address" name="address"></textarea><br><br>
-            <label for="city">City:</label>
-            <input type="text" id="city" name="city"><br><br>
-            <label for="state">State:</label>
-            <input type="text" id="state" name="state"><br><br>
-            <label>Course:</label>
-            <input type="radio" id="course1" name="course" value="Computer science"> Computer science
-            <input type="radio" id="course2" name="course" value="Data Science"> Data Science
-            <input type="radio" id="course3" name="course" value="Bussiness managment"> Bussiness managment
-            <input type="radio" id="course1" name="course" value="AIML"> AIML <br><br>
-            <label for="college name">College name:</label>
-            <textarea id="college name" name="college name"></textarea><br><br>
-            <input type="submit" value="Submit">
+            <input type="text" name="mobile" id="mobile" required><br>
 
+            <input type="submit" value="Register">
         </form>
-    </body>
-</html>
+    </div>
 
-
-next.html
-<!DOCTYPE html>
-    <head>
-        <title>Details Page</title>
-    </head>
-    <body>
-        <h1>Your Submitted Details</h1>
-        
-        <p><strong>First Name:</strong> <span id="firstName"></span></p>
-        <p><strong>Last Name:</strong> <span id="lastName"></span></p>
-        <p><strong>Gender:</strong> <span id="gender"></span></p>
-        <p><strong>Mobile Number:</strong> <span id="mobile"></span></p>
-        <p><strong>Email:</strong> <span id="email"></span></p>
-        <p><strong>Address:</strong> <span id="address"></span></p>
-        <p><strong>City:</strong> <span id="city"></span></p>
-        <p><strong>State:</strong> <span id="state"></span></p>
-        <p><strong>Course:</strong> <span id="course"></span></p>
-
-        <script>
-            const urlParams = new URLSearchParams(window.location.search);
-            document.getElementById("firstName").textContent = urlParams.get("firstName");
-            document.getElementById("lastName").textContent = urlParams.get("lastName");
-            document.getElementById("gender").textContent = urlParams.get("gender");
-            document.getElementById("mobile").textContent = urlParams.get("mobile");
-            document.getElementById("email").textContent = urlParams.get("email");
-            document.getElementById("address").textContent = urlParams.get("address");
-            document.getElementById("city").textContent = urlParams.get("city");
-            document.getElementById("state").textContent = urlParams.get("state");
-            document.getElementById("course").textContent = urlParams.get("course");
-        </script>
-    </body>
+    <div class="thank-you-container" style="display:none;">
+        <h1>Thank You for Registering!</h1>
+        <p>Your registration has been successfully completed. We will contact you soon.</p>
+    </div>
+</body>
 </html>
