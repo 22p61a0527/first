@@ -1,1 +1,144 @@
-MY NAME IS SIRI JAHNAVI
+REGISTRATION.html
+<!DOCTYPE >
+<html>
+    <head>
+        <title>REGISTRATION FORM</title>
+        <script type="text/javascript">
+            function validateForm() {
+                var firstName = document.getElementById("firstName").value;
+                var lastName = document.getElementById("lastName").value;
+                var mobile = document.getElementById("mobile").value;
+                var email = document.getElementById("email").value;
+                var password = document.getElementById("password").value;
+                var address = document.getElementById("address").value;
+                var city = document.getElementById("city").value;
+                var state = document.getElementById("state").value;
+                var country = document.getElementById("country").value;
+                var gender = document.querySelector('input[name="gender"]:checked');
+                var course = document.querySelector('input[name="course"]:checked');
+                if (firstName == "") {
+                alert("First Name must be filled out.");
+                return false;
+            }
+
+            if (lastName == "") {
+                alert("Last Name must be filled out.");
+                return false;
+            }
+
+            if (mobile == "" || !/^\d{10}$/.test(mobile)) {
+                alert("Please enter a valid 10-digit mobile number.");
+                return false;
+            }
+
+            var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (email == "" || !emailPattern.test(email)) {
+                alert("Please enter a valid email address.");
+                return false;
+            }
+
+            if (password == "" || password.length < 8) {
+                alert("Password must be at least 8 characters long.");
+                return false;
+            }
+
+            if (address == "") {
+                alert("Address must be filled out.");
+                return false;
+            }
+
+            if (city == "") {
+                alert("City must be filled out.");
+                return false;
+            }
+
+            if (state == "") {
+                alert("State must be filled out.");
+                return false;
+            }
+
+            if (!gender) {
+                alert("Please select your gender.");
+                return false;
+            }
+
+            if (!course) {
+                alert("Please select a course.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</head>
+<img src="/home/vbit/Desktop/527/logo.png" style="width:40%;"><br> <br>
+
+<body>
+
+    <form action="nextpage.html" method="get">
+            <label for="First name">First name:</label>
+            <input type="text" id="First name" name="name" required> <br><br>
+            <label for="Last name">Last name:</label>
+            <input type="text" id="Last name" name="name" required> <br><br>
+            <label for="Gender">Gender:</label>
+            <input type="radio" id="Male" name="Gender" value="Male"> Male
+            <input type="radio" id="Female" name="Gender" value="Female"> Female
+            <input type="radio" id="Other" name="Gender" value="Other"> Other<br><br>
+            <label for="mobile">Mobile Number:</label>
+            <input type="text" id="mobile" name="mobile"><br><br>
+            <label for="Email">Email:</label>
+            <input type="text" id="Email" name="Email"><br><br>
+            <label for="Password">Password:</label>
+            <input type="password" id="Password" name="Password"><br><br>
+            <label for="address">Address:</label>
+            <textarea id="address" name="address"></textarea><br><br>
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city"><br><br>
+            <label for="state">State:</label>
+            <input type="text" id="state" name="state"><br><br>
+            <label>Course:</label>
+            <input type="radio" id="course1" name="course" value="Computer science"> Computer science
+            <input type="radio" id="course2" name="course" value="Data Science"> Data Science
+            <input type="radio" id="course3" name="course" value="Bussiness managment"> Bussiness managment
+            <input type="radio" id="course1" name="course" value="AIML"> AIML <br><br>
+            <label for="college name">College name:</label>
+            <textarea id="college name" name="college name"></textarea><br><br>
+            <input type="submit" value="Submit">
+
+        </form>
+    </body>
+</html>
+
+
+next.html
+<!DOCTYPE html>
+    <head>
+        <title>Details Page</title>
+    </head>
+    <body>
+        <h1>Your Submitted Details</h1>
+        
+        <p><strong>First Name:</strong> <span id="firstName"></span></p>
+        <p><strong>Last Name:</strong> <span id="lastName"></span></p>
+        <p><strong>Gender:</strong> <span id="gender"></span></p>
+        <p><strong>Mobile Number:</strong> <span id="mobile"></span></p>
+        <p><strong>Email:</strong> <span id="email"></span></p>
+        <p><strong>Address:</strong> <span id="address"></span></p>
+        <p><strong>City:</strong> <span id="city"></span></p>
+        <p><strong>State:</strong> <span id="state"></span></p>
+        <p><strong>Course:</strong> <span id="course"></span></p>
+
+        <script>
+            const urlParams = new URLSearchParams(window.location.search);
+            document.getElementById("firstName").textContent = urlParams.get("firstName");
+            document.getElementById("lastName").textContent = urlParams.get("lastName");
+            document.getElementById("gender").textContent = urlParams.get("gender");
+            document.getElementById("mobile").textContent = urlParams.get("mobile");
+            document.getElementById("email").textContent = urlParams.get("email");
+            document.getElementById("address").textContent = urlParams.get("address");
+            document.getElementById("city").textContent = urlParams.get("city");
+            document.getElementById("state").textContent = urlParams.get("state");
+            document.getElementById("course").textContent = urlParams.get("course");
+        </script>
+    </body>
+</html>
